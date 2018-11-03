@@ -32,8 +32,8 @@ int main()
   source.device = NULL;
 
   /* note: we're assuming BSD-style reliable signals here */
-  (void)signal(SIGINT, die);
-  (void)signal(SIGHUP, die);
+  // (void)signal(SIGINT, die);
+  // (void)signal(SIGHUP, die);
   // (void)signal(SIGWINCH, resize);
 
   if (gps_open(source.server, source.port, &gpsdata) != 0)
