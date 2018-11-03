@@ -12,6 +12,7 @@ struct fixsource_t
 
 int main()
 {
+  printf("%d", 12);
 
   return 0;
 }
