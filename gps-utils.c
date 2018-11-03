@@ -2,7 +2,7 @@
 #include <errno.h>
 #include <curses.h>
 #include "gps-utils.h"
-#include "gps.h"
+// #include "gps.h"
 
 static struct gps_data_t gpsdata;
 
