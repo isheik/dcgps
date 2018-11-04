@@ -1,13 +1,14 @@
 #include <gps.h>
 #include <math.h>
-#include <time.h
+#include <time.h>
 #include "gpsprint.h"
 #include "gpsdclient.h"
 
-static enum deg_str_type deg_type = deg_dd;
+//static enum deg_str_type deg_type = deg_dd;
 #define MAX_POSSIBLE_SATS (MAXCHANNELS - 2)
 bool usedflags[MAXCHANNELS];
-time_t time;
+time_t update_time;
+struct tm *update_time_st;
 
 void gps_print(struct gps_data_t *gpsdata)
 {
@@ -32,8 +33,8 @@ void gps_print(struct gps_data_t *gpsdata)
         // fprintf (stdout, "PRN: %3d gpsdata->PRN[i],
         // .............................
         // .............................);
-          fprintf(stdout, "PRN: %3d Elevation: %02d Azimuth: %03d SNR: %02d Used %c\n",
-                 gpsdata->skyview[i].PRN, gpsdata->skyview[i].Elevation, gpsdata->skyview[i].Azimuth, gpsdata->skyview[i].used);
+          fprintf(stdout, "PRN: %3d Elevation: %02d Azimuth: %03d SNR: %02f Used %c\n",
+                 gpsdata->skyview[i].PRN, gpsdata->skyview[i].elevation, gpsdata->skyview[i].azimuth, gpsdata->skyview[i].ss, (gpsdata->skyview[i].used) ? 'Y' : 'N');
         
       }
     }
@@ -45,8 +46,12 @@ void gps_print(struct gps_data_t *gpsdata)
     
     if (gpsdata->fix.mode >= MODE_2D && isnan(gpsdata->fix.latitude) == 0 && isnan(gpsdata->fix.longitude) == 0 && isnan(gpsdata->fix.time) == 0)
         {
-            time = (time_t)gpsdata->fix.time;
-            fprintf(stdout, "%f ; Latitude: %s %c ; Longitude: %s %c", time, gpsdata->fix.latitude, (gpsdata->fix.latitude < 0) ? 'S' : 'N', gpsdata->fix.longitude, (gpsdata->fix.longitude < 0) ? 'W' : 'E');
+            update_time = (time_t)gpsdata->fix.time;
+	    update_time_st = gmtime(&update_time);
+            fprintf(stdout, "%f ; Latitude: %f %c ; Longitude: %f %c",
+			    (double)update_time, gpsdata->fix.latitude,
+			    (gpsdata->fix.latitude < 0) ? 'S' : 'N',
+			    gpsdata->fix.longitude, (gpsdata->fix.longitude < 0) ? 'W' : 'E');
             fflush(stdout);
         }
         else
