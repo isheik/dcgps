@@ -48,11 +48,12 @@
 // }
 bool usedflags[MAXCHANNELS];
 
-void *gps_loop(void *gpsdata)
+void *gps_loop(void *gpsdatam)
 {
   int wait_clicks = 0;
   int i = 0;
   int j = 0;
+  struct gps_data_t gpsdata = gpsdatam;
 
   while (1)
   {
