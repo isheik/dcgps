@@ -1,6 +1,6 @@
 #include <stdlib.h>
 #include <errno.h>
-#include <curses.h>
+// #include <curses.h>
 #include <gps.h>
 #include "gps-utils.h"
 #include "gpsprint.h"
