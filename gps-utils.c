@@ -51,6 +51,9 @@ bool usedflags[MAXCHANNELS];
 void *gps_loop(void *gpsdata)
 {
   int wait_clicks = 0;
+  int i = 0;
+  int j = 0;
+
   while (1)
   {
     /* wait 1/2 second for gpsd */
