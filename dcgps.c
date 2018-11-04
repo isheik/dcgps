@@ -15,6 +15,7 @@
 
 static struct gps_data_t gpsdata;
 unsigned int flags = WATCH_ENABLE;
+// WINDOW datawin;
 
 /* describe a data source */
 struct fixsource_t
@@ -51,7 +52,25 @@ int main()
 
   (void)gps_stream(&gpsdata, flags, source.device);
 
-  (void)gps_close(&gpsdata);
+  pthread_t thread_id;
+  pthread_create(&thread_id, NULL, gps_loop, gpsdata);
+
+  char c;
+  while (1)
+  {
+    c = getchar();
+
+    switch (c)
+    {
+      /* Quit */
+    case 'q':
+      (void)gps_close(&gpsdata);
+      exit(0);
+      break;
+    default:
+      break;
+    }
+  }
 
   return 0;
 }
