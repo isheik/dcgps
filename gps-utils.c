@@ -54,8 +54,6 @@ static enum deg_str_type deg_type = deg_dd;
 void *gps_loop(void *gpsdatam)
 {
   int wait_clicks = 0;
-  int i = 0;
-  int j = 0;
   struct gps_data_t *gpsdata;
   gpsdata = (struct gps_data_t *)gpsdatam;
 
