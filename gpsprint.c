@@ -3,6 +3,8 @@
 #include "gpsprint.h"
 #include "gpsdclient.h"
 
+static enum deg_str_type deg_type = deg_dd;
+
 void gps_print(struct gps_data_t *gpsdata)
 {
   int i = 0;

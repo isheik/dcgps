@@ -49,7 +49,6 @@
 // }
 #define MAX_POSSIBLE_SATS (MAXCHANNELS - 2)
 bool usedflags[MAXCHANNELS];
-static enum deg_str_type deg_type = deg_dd;
 
 void *gps_loop(void *gpsdatam)
 {
