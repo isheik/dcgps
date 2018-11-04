@@ -9,6 +9,6 @@
 #define GPS_TIMEOUT -3 /* low-level failure in GPS waiting */
 
 extern void die(int sig);
-void gps_loop(gps_data_t *gpsdata);
+void gps_loop(struct gps_data_t *gpsdata);
 
 #endif
