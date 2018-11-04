@@ -53,7 +53,7 @@ int main()
   (void)gps_stream(&gpsdata, flags, source.device);
 
   pthread_t thread_id;
-  pthread_create(&thread_id, NULL, gps_loop, gpsdata);
+  pthread_create(&thread_id, NULL, gps_loop, &gpsdata);
 
   char c;
   while (1)
