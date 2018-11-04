@@ -3,6 +3,8 @@
 #include <curses.h>
 #include "gps-utils.h"
 #include <gps.h>
+#include <gpsdclient.h>
+#include <math.h>
 // #include "gps.h"
 
 // static struct gps_data_t gpsdata;
@@ -46,14 +48,17 @@
 //   /* Bye! */
 //   exit(EXIT_SUCCESS);
 // }
+#define MAX_POSSIBLE_SATS (MAXCHANNELS - 2)
 bool usedflags[MAXCHANNELS];
+
 
 void *gps_loop(void *gpsdatam)
 {
   int wait_clicks = 0;
   int i = 0;
   int j = 0;
-  struct gps_data_t gpsdata = gpsdatam;
+  struct gps_data_t *gpsdata;
+  gpsdata = (struct gps_data_t*)gpsdatam;
 
   while (1)
   {
@@ -85,7 +90,7 @@ void *gps_loop(void *gpsdatam)
         {
           usedflags[i] = false;
           for (j = 0; j < gpsdata->satellites_used; j++)
-            if (gpsdata->used[j] == gpsdata->PRN[i])
+            if (gpsdata->skyview[j].used == gpsdata->skyview[j].PRN)
               usedflags[i] = true;
         }
 
