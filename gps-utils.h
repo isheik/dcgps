@@ -7,6 +7,6 @@
 #define GPS_ERROR -2   /* low-level failure in GPS read */
 #define GPS_TIMEOUT -3 /* low-level failure in GPS waiting */
 
-static void die(int sig);
+extern void die(int sig);
 
 #endif
