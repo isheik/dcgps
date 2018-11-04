@@ -47,8 +47,6 @@
 //   /* Bye! */
 //   exit(EXIT_SUCCESS);
 // }
-#define MAX_POSSIBLE_SATS (MAXCHANNELS - 2)
-bool usedflags[MAXCHANNELS];
 
 void *gps_loop(void *gpsdatam)
 {

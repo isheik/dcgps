@@ -4,6 +4,8 @@
 #include "gpsdclient.h"
 
 static enum deg_str_type deg_type = deg_dd;
+#define MAX_POSSIBLE_SATS (MAXCHANNELS - 2)
+bool usedflags[MAXCHANNELS];
 
 void gps_print(struct gps_data_t *gpsdata)
 {
