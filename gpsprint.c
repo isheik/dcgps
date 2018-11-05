@@ -47,6 +47,10 @@ void gps_print(struct gps_data_t *gpsdata)
   }
   else
   {
+    time(&update_time);
+    update_time_st = gmtime(&update_time);
+    strftime(date_str, 256, "%Y-%m-%dT%H:%M:%S.000Z; ", update_time_st);
+    fputs(date_str, stdout);
     fprintf(stdout, "n/a\n\n");
   }
 }
