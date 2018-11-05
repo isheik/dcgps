@@ -59,7 +59,7 @@ void gps_print(struct gps_data_t *gpsdata)
     strftime(date_str, 256, "%Y-%m-%dT%H:%M:%S.000Z; ", update_time_st);
     fputs(date_str, stdout);
     fprintf(stdout, "Latitude: %f %c ; ", gpsdata->fix.latitude, (gpsdata->fix.latitude < 0) ? 'S' : 'N');
-    fprintf(stdout, "Longitude: %f %c ;\n", gpsdata->fix.longitude, (gpsdata->fix.longitude < 0) ? 'W' : 'E');
+    fprintf(stdout, "Longitude: %f %c ;\n\n", gpsdata->fix.longitude, (gpsdata->fix.longitude < 0) ? 'W' : 'E');
     // fprintf(stdout, "%f ; Latitude: %f %c ; Longitude: %f %c",
     //         (double)update_time, gpsdata->fix.latitude,
     //         (gpsdata->fix.latitude < 0) ? 'S' : 'N',
@@ -68,6 +68,6 @@ void gps_print(struct gps_data_t *gpsdata)
   }
   else
   {
-    printf("n/a\n");
+    printf("n/a\n\n");
   }
 }
