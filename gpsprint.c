@@ -34,11 +34,11 @@ void gps_print(struct gps_data_t *gpsdata)
         // fprintf (stdout, "PRN: %3d gpsdata->PRN[i],
         // .............................
         // .............................);
-        fprint(stdout, "PRN: %3d ", gpsdata->skyview[i].PRN);
-        fprint(stdout, "Elevation: %02d ", gpsdata->skyview[i].elevation);
-        fprint(stdout, "Azimuth: %03d ", gpsdata->skyview[i].azimuth);
-        fprint(stdout, "SNR: %02f ", gpsdata->skyview[i].ss);
-        fprint(stdout, "Used %c\n", (gpsdata->skyview[i].used) ? 'Y' : 'N');
+        fprintf(stdout, "PRN: %3d ", gpsdata->skyview[i].PRN);
+        fprintf(stdout, "Elevation: %02d ", gpsdata->skyview[i].elevation);
+        fprintf(stdout, "Azimuth: %03d ", gpsdata->skyview[i].azimuth);
+        fprintf(stdout, "SNR: %02f ", gpsdata->skyview[i].ss);
+        fprintf(stdout, "Used %c\n", (gpsdata->skyview[i].used) ? 'Y' : 'N');
         // fprintf(stdout, "PRN: %3d Elevation: %02d Azimuth: %03d SNR: %02f Used %c\n",
         // gpsdata->skyview[i].PRN, gpsdata->skyview[i].elevation, gpsdata->skyview[i].azimuth, gpsdata->skyview[i].ss, (gpsdata->skyview[i].used) ? 'Y' : 'N');
       }
