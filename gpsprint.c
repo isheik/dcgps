@@ -47,6 +47,6 @@ void gps_print(struct gps_data_t *gpsdata)
   }
   else
   {
-    printf(stdout, "n/a\n\n");
+    fprintf(stdout, "n/a\n\n");
   }
 }
