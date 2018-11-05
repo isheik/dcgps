@@ -1,13 +1,53 @@
+/*------------------------------------------------------------------------------------------------------------------
+-- SOURCE FILE: gps-utils.c - Utility program for dcgps
+--
+-- PROGRAM: gps-utils.o
+--
+-- FUNCTIONS:
+-- void *gps_loop(void *arg_gpsdata)
+--
+-- DATE: November 4, 2018
+--
+-- REVISIONS:
+--
+-- DESIGNER: Keishi Asai / Kiaan Castillo
+--
+-- PROGRAMMER: Keishi Asai 
+--
+-- NOTES:
+-- Provide utility functions for dcgps.
+----------------------------------------------------------------------------------------------------------------------*/
+
 #include <stdlib.h>
 #include <gps.h>
 #include "gps-utils.h"
 #include "gpsprint.h"
 
-void *gps_loop(void *gpsdatam)
+/*------------------------------------------------------------------------------------------------------------------
+-- FUNCTION: gps_loop
+--
+-- DATE: November 4, 2018
+--
+-- REVISIONS:
+--
+-- DESIGNER: Keishi Asai / Kiaan Castillo
+--
+-- PROGRAMMER: Keishi Asai
+--
+-- INTERFACE: void *gps_loop(void *arg_gpsdata) 
+--                          void *arg_gpsdata: A report stream for GPS
+--
+-- RETURNS: void
+--
+-- NOTES:
+-- A callback function executed in a thread. Wait for data from gpsd.
+-- If data were received before timeout, read data and call a function to display it on console. 
+----------------------------------------------------------------------------------------------------------------------*/
+void *gps_loop(void *arg_gpsdata)
 {
   int wait_clicks = 0;
   struct gps_data_t *gpsdata;
-  gpsdata = (struct gps_data_t *)gpsdatam;
+  gpsdata = (struct gps_data_t *)arg_gpsdata;
 
   while (1)
   {

@@ -1,3 +1,23 @@
+/*------------------------------------------------------------------------------------------------------------------
+-- SOURCE FILE: gpsprint.c - Print program for dcgps
+--
+-- PROGRAM: gpsprint.o
+--
+-- FUNCTIONS:
+-- void gps_print(struct gps_data_t *gpsdata)
+--
+-- DATE: November 4, 2018
+--
+-- REVISIONS:
+--
+-- DESIGNER: Kiaan Castillo
+--
+-- PROGRAMMER: Kiaan Castillo
+--
+-- NOTES:
+-- Provide output functions for dcgps
+----------------------------------------------------------------------------------------------------------------------*/
+
 #include <gps.h>
 #include <math.h>
 #include <time.h>
@@ -8,11 +28,30 @@ time_t update_time;
 struct tm *update_time_st;
 char date_str[256];
 
+/*------------------------------------------------------------------------------------------------------------------
+-- FUNCTION: gps_print
+--
+-- DATE: November 4, 2018
+--
+-- REVISIONS:
+--
+-- DESIGNER: Kiaan Castillo
+--
+-- PROGRAMMER: Kiaan Castillo
+--
+-- INTERFACE: void gps_print(struct gps_data_t *gpsdata) 
+--                          struct gps_data_t *gpsdata: A report stream for GPS 
+--
+-- RETURNS: void
+--
+-- NOTES:
+-- Prints data read from the report stream.
+----------------------------------------------------------------------------------------------------------------------*/
 void gps_print(struct gps_data_t *gpsdata)
 {
   int i = 0;
 
-  // Some satellites are visible
+  // List visible satellites
   if (gpsdata->satellites_visible != 0)
   {
     for (i = 0; i < MAX_POSSIBLE_SATS; i++)
@@ -32,8 +71,10 @@ void gps_print(struct gps_data_t *gpsdata)
     fprintf(stderr, "No satellite found\n");
   }
 
+  // If a fix obtained, display received information
   if (gpsdata->fix.mode >= MODE_2D && isnan(gpsdata->fix.latitude) == 0 && isnan(gpsdata->fix.longitude) == 0 && isnan(gpsdata->fix.time) == 0)
   {
+    // Display update time (UTC)
     update_time = (time_t)gpsdata->fix.time;
     update_time_st = gmtime(&update_time);
     strftime(date_str, 256, "%Y-%m-%dT%H:%M:%S.000Z; ", update_time_st);
@@ -46,10 +87,12 @@ void gps_print(struct gps_data_t *gpsdata)
   }
   else
   {
+    // Display update time (UTC)
     time(&update_time);
     update_time_st = gmtime(&update_time);
     strftime(date_str, 256, "%Y-%m-%dT%H:%M:%S.000Z; ", update_time_st);
     fputs(date_str, stdout);
+
     fprintf(stdout, "n/a\n\n");
   }
 }
