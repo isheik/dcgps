@@ -6,7 +6,7 @@
 
 //static enum deg_str_type deg_type = deg_dd;
 #define MAX_POSSIBLE_SATS (MAXCHANNELS - 2)
-bool usedflags[MAXCHANNELS];
+// bool usedflags[MAXCHANNELS];
 time_t update_time;
 struct tm *update_time_st;
 char date_str[256];
@@ -16,13 +16,13 @@ void gps_print(struct gps_data_t *gpsdata)
   int i = 0;
   int j = 0;
   // Print gps
-  for (i = 0; i < MAXCHANNELS; i++)
-  {
-    usedflags[i] = false;
-    for (j = 0; j < gpsdata->satellites_used; j++)
-      if (gpsdata->skyview[j].used == gpsdata->skyview[j].PRN)
-        usedflags[i] = true;
-  }
+  // for (i = 0; i < MAXCHANNELS; i++)
+  // {
+  //   usedflags[i] = false;
+  //   for (j = 0; j < gpsdata->satellites_used; j++)
+  //     if (gpsdata->skyview[j].used == gpsdata->skyview[j].PRN)
+  //       usedflags[i] = true;
+  // }
 
   if (gpsdata->satellites_visible != 0) // Some satellites are visible {
   {
