@@ -32,18 +32,27 @@ void gps_print(struct gps_data_t *gpsdata)
     fprintf(stderr, "No satellite found\n");
   }
 
-  update_time = (time_t)gpsdata->fix.time;
-  update_time_st = gmtime(&update_time);
-  strftime(date_str, 256, "%Y-%m-%dT%H:%M:%S.000Z; ", update_time_st);
-  fputs(date_str, stdout);
-
   if (gpsdata->fix.mode >= MODE_2D && isnan(gpsdata->fix.latitude) == 0 && isnan(gpsdata->fix.longitude) == 0 && isnan(gpsdata->fix.time) == 0)
   {
+    update_time = (time_t)gpsdata->fix.time;
+    update_time_st = gmtime(&update_time);
+    strftime(date_str, 256, "%Y-%m-%dT%H:%M:%S.000Z; ", update_time_st);
+    fputs(date_str, stdout);
+
     fprintf(stdout, "Latitude: %f %c ; ", gpsdata->fix.latitude, (gpsdata->fix.latitude < 0) ? 'S' : 'N');
     fprintf(stdout, "Longitude: %f %c\n\n", gpsdata->fix.longitude, (gpsdata->fix.longitude < 0) ? 'W' : 'E');
     fprintf(stdout, "n/a\n\n");
 
     fflush(stdout);
+  }
+  else if (gpsdata->fix.mode >= MODE_1D)
+  {
+    update_time = (time_t)gpsdata->fix.time;
+    update_time_st = gmtime(&update_time);
+    strftime(date_str, 256, "%Y-%m-%dT%H:%M:%S.000Z; ", update_time_st);
+    fputs(date_str, stdout);
+
+    fprintf(stdout, "n/a\n\n");
   }
   else
   {
