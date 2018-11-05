@@ -14,7 +14,7 @@ char date_str[256];
 void gps_print(struct gps_data_t *gpsdata)
 {
   int i = 0;
-  int j = 0;
+  // int j = 0;
   // Print gps
   // for (i = 0; i < MAXCHANNELS; i++)
   // {
